@@ -1,5 +1,3 @@
-# treehouse-challenges-unit-8
-This is a collection of the exercises and challenges from the Unit 8 of TreeHouse.
 # SQL Library Manager
 
 ## Overview
@@ -97,3 +95,11 @@ Contributions are welcome! If you have any suggestions or improvements, please c
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+If you have any questions or suggestions, feel free to contact the project maintainer:
+
+Name: Jeph Mari Daligdig
+Email: daligdig.jephmari@gmail.com
+GitHub: greatxrider
