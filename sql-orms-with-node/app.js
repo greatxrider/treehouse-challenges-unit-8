@@ -17,9 +17,9 @@ const { Movie } = db.models;
                 isAvailableOnVHS: true,
             }),
             Movie.create({
-                title: 'The Incredibles',
+                title: '',
                 runtime: 115,
-                releaseDate: '2004-04-14',
+                releaseDate: '1895-12-22',
                 isAvailableOnVHS: true,
             }),
         ]);
@@ -30,6 +30,12 @@ const { Movie } = db.models;
         await db.sequelize.authenticate();
         console.log('Connection to the database successful!');
     } catch (error) {
-        console.error('Error connecting to the database: ', error);
+        if (error.name === 'SequelizeValidationError') {
+            const errors = error.errors.map(err => err.message);
+            console.error('Validation errors: ', errors);
+        } else {
+            throw error;
+        }
+        // console.error('Error connecting to the database: ', error);
     }
 })();
