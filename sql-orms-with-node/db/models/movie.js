@@ -3,6 +3,7 @@ const Sequelize = require('sequelize');
 module.exports = (sequelize) => {
     class Movie extends Sequelize.Model { }
     Movie.init({
+        // Attributes object
         id: {
             type: Sequelize.DataTypes.UUID,
             defaultValue: Sequelize.DataTypes.UUIDV1,
@@ -57,7 +58,12 @@ module.exports = (sequelize) => {
                 }
             }
         },
-    }, { sequelize });
+    },
+        // Model options object
+        {
+            modelName: 'movie',
+            sequelize
+        });
 
     return Movie;
 };

@@ -1,5 +1,5 @@
 const db = require('./db');
-const { Movie } = db.models;
+const { Movie, Person } = db.models;
 
 // async IIFE
 (async () => {
@@ -17,11 +17,23 @@ const { Movie } = db.models;
                 isAvailableOnVHS: true,
             }),
             Movie.create({
-                title: '',
+                title: 'The Incredibles',
                 runtime: 115,
-                releaseDate: '1895-12-22',
+                releaseDate: '2008-12-22',
                 isAvailableOnVHS: true,
             }),
+        ]);
+
+        // Instance of the Person class
+        const personInstances = await Promise.all([
+            Person.create({
+                firstName: 'John',
+                lastName: 'Lasseter'
+            }),
+            Person.create({
+                firstName: 'Brad',
+                lastName: 'Bird'
+            })
         ]);
 
         const moviesJSON = movieInstances.map(movie => movie.toJSON());
@@ -32,10 +44,10 @@ const { Movie } = db.models;
     } catch (error) {
         if (error.name === 'SequelizeValidationError') {
             const errors = error.errors.map(err => err.message);
+            console.error('Error connecting to the database');
             console.error('Validation errors: ', errors);
         } else {
             throw error;
         }
-        // console.error('Error connecting to the database: ', error);
     }
 })();
