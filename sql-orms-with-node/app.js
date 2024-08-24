@@ -1,4 +1,3 @@
-const { title } = require('process');
 const db = require('./db');
 const { Movie } = db.models;
 
