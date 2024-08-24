@@ -24,6 +24,13 @@ const { Movie, Person } = db.models;
             }),
         ]);
 
+        const movie3 = await Movie.build({
+            title: 'Toy Story 3',
+            runtime: 103,
+            releaseDate: '2010-06-18',
+            isAvailableOnVHS: false,
+        })
+
         // Instance of the Person class
         const personInstances = await Promise.all([
             Person.create({
@@ -38,6 +45,10 @@ const { Movie, Person } = db.models;
 
         const moviesJSON = movieInstances.map(movie => movie.toJSON());
         console.log(moviesJSON);
+
+        movie3.title = 'Updated Title';
+        await movie3.save();
+        console.log(movie3.toJSON());
 
         await db.sequelize.authenticate();
         console.log('Connection to the database successful!');
