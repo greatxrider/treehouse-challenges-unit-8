@@ -1,6 +1,6 @@
 const db = require('./db');
 const { Movie, Person } = db.models;
-
+console.log(db.models);
 // async IIFE
 (async () => {
     // Sync all tables
@@ -21,7 +21,7 @@ const { Movie, Person } = db.models;
                 runtime: 115,
                 releaseDate: '2008-12-22',
                 isAvailableOnVHS: true,
-            }),
+            })
         ]);
 
         const movie3 = await Movie.build({

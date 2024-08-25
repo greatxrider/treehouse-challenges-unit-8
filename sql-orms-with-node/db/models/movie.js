@@ -64,6 +64,5 @@ module.exports = (sequelize) => {
             modelName: 'movie',
             sequelize
         });
-
     return Movie;
 };
