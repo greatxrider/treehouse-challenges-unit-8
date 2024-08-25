@@ -1,15 +1,15 @@
-const Sequelize = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    class Person extends Sequelize.Model { }
+    class Person extends Model { }
     Person.init({
         id: {
-            type: Sequelize.DataTypes.UUID,
-            defaultValue: Sequelize.DataTypes.UUIDV1,
-            primaryKey: true
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
         },
         firstName: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false, // disallow null
             validate: {
                 notEmpty: {
@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
             }
         },
         lastName: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false, // disallow null
             validate: {
                 notEmpty: {

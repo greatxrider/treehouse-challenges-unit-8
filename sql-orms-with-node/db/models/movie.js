@@ -1,16 +1,16 @@
-const Sequelize = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    class Movie extends Sequelize.Model { }
+    class Movie extends Model { }
     Movie.init({
         // Attributes object
         id: {
-            type: Sequelize.DataTypes.UUID,
-            defaultValue: Sequelize.DataTypes.UUIDV1,
-            primaryKey: true
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
         },
         title: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false, // disallow null
             validate: {
                 notEmpty: {
@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
             }
         },
         runtime: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false, // disallow null
             validate: {
                 notNull: {
@@ -36,7 +36,7 @@ module.exports = (sequelize) => {
             }
         },
         releaseDate: {
-            type: Sequelize.DATEONLY,
+            type: DataTypes.DATEONLY,
             allowNull: false, // disallow null
             validate: {
                 notNull: {
@@ -49,7 +49,7 @@ module.exports = (sequelize) => {
             },
         },
         isAvailableOnVHS: {
-            type: Sequelize.BOOLEAN,
+            type: DataTypes.BOOLEAN,
             allowNull: false, // disallow null,
             defaultValue: false, // set default value
             validate: {

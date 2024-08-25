@@ -1,7 +1,6 @@
 {
   "name": "sql-orms-with-nodejs",
   "version": "1.0.0",
-  "type": "commonjs",
   "description": "",
   "main": "app.js",
   "scripts": {

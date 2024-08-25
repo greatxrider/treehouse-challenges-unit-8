@@ -1,6 +1,6 @@
 const db = require('./db');
 const { Movie, Person } = db.models;
-console.log(db.models);
+
 // async IIFE
 (async () => {
     // Sync all tables
@@ -21,7 +21,7 @@ console.log(db.models);
                 runtime: 115,
                 releaseDate: '2008-12-22',
                 isAvailableOnVHS: true,
-            })
+            }),
         ]);
 
         const movie3 = await Movie.build({
@@ -49,6 +49,23 @@ console.log(db.models);
         movie3.title = 'Updated Title';
         await movie3.save();
         console.log(movie3.toJSON());
+
+        //findByPk
+        const movieById = await Movie.findByPk(1);
+        console.log('findByPk: ', movieById.toJSON());
+
+        //findOne
+        const movieByRuntime = await Movie.findOne({ where: { releaseDate: '2008-12-22' } });
+        console.log('findOne: ', movieByRuntime.toJSON());
+
+        //findAll
+        // SELECT * FROM People WHERE lastName = 'Hanks';
+        const movies = await Movie.findAll({
+            where: {
+                title: 'The Incredibles'
+            }
+        });
+        console.log('findAll: ', movies.map(movie => movie.toJSON()));
 
         await db.sequelize.authenticate();
         console.log('Connection to the database successful!');
