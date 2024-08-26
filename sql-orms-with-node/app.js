@@ -1,5 +1,7 @@
 const db = require('./db');
+const movie = require('./db/models/movie');
 const { Movie, Person } = db.models;
+const { Op } = db.Sequelize;
 
 // async IIFE
 (async () => {
@@ -60,12 +62,48 @@ const { Movie, Person } = db.models;
 
         //findAll
         // SELECT * FROM People WHERE lastName = 'Hanks';
+        // Retrun only specific columns using attributes property
         const movies = await Movie.findAll({
+            attributes: ['id', 'title'],
             where: {
                 title: 'The Incredibles'
             }
         });
         console.log('findAll: ', movies.map(movie => movie.toJSON()));
+
+        //findAll
+        //With Operator
+        //With Order
+        const moviesOp = await Movie.findAll({
+            where: {
+                releaseDate: {
+                    [Op.gte]: '2004-01-01' // greater than or equal to the date
+                },
+                runtime: {
+                    [Op.gt]: 95, // greater than 95
+                }
+            },
+            order: [['id', 'DESC']] // IDs in descending order
+        });
+        console.log('Operator: ', moviesOp.map(movie => movie.toJSON()));
+
+        //Uppdate with save()
+        const toyStory3 = await Movie.findByPk(3);
+        toyStory3.isAvailableOnVHS = true;
+        await toyStory3.save();
+        console.log('Updated using save()', toyStory3.get({ plain: true }));
+
+        //Update with update() with options object
+        //and fields property
+        toyStory3.update({
+            title: 'Naruto Ultimate Ninja Storm'
+        }, { fields: ['title'] });
+        console.log('Update using update()', toyStory3.get({ plain: true }))
+
+        //Delete the updated attribute using destroy()
+        //adding paranoid property on option
+        toyStory3.destroy();
+        console.log(movies.map(movie => movie.toJSON()));
 
         await db.sequelize.authenticate();
         console.log('Connection to the database successful!');

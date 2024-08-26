@@ -6,7 +6,7 @@ const sequelize = new Sequelize({
     logging: false,
     define: {
         freezeTableName: true,
-        timestamps: false,
+        // timestamps: false,
     },
 });
 

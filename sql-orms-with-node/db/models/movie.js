@@ -61,8 +61,10 @@ module.exports = (sequelize) => {
     },
         // Model options object
         {
+            paranoid: true,
             modelName: 'movie',
             sequelize
         });
+
     return Movie;
 };
