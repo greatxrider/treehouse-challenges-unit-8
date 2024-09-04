@@ -56,6 +56,7 @@ router.get("/:id/edit", asyncHandler(async (req, res) => {
 
 /* GET individual article. */
 router.get("/:id", asyncHandler(async (req, res) => {
+  console.log('open sesame');
   const article = await Article.findByPk(req.params.id);
   if (article) {
     res.render("articles/show", { article, title: article.title });
